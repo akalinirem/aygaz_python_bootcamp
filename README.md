@@ -11,8 +11,8 @@ Gereksinimler
 Python 3.x
 Tkinter (Python ile birlikte gelir)
 
-Kod Açıklamaları
-GameApp Sınıfı
+Kod Açıklamaları \n
+GameApp Sınıfı \n
 __init__(self, root): Uygulamanın başlatıcı fonksiyonudur. Arayüz bileşenlerini oluşturur.
 make_move(self, player_move): Oyuncunun hamlesini işler ve oyunu günceller.
 update_game_info(self, player_move, computer_move, result, result_color): Oyun bilgilerini günceller ve sonucu renkli olarak gösterir.

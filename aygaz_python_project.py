@@ -4,16 +4,16 @@ import random
 
 class GameApp:
     def __init__(self, root):
-        """Başlatıcı: Oyun uygulamasını başlatır ve arayüzü oluşturur."""
+        """Launcher: Launches the game application and creates the interface."""
         self.root = root
         self.root.title("Taş Kağıt Makas Oyunu")
         self.root.geometry("700x500")
 
-        # Ana çerçeve oluşturur
+        # Creates the main framework
         self.main_frame = tk.Frame(self.root)
         self.main_frame.pack(fill=tk.BOTH, expand=True)
 
-        # Başlık etiketi oluşturur ve ortalar
+        # Creates and centers a title tag
         self.label = tk.Label(
             self.main_frame,
             text="Taş Kağıt Makas Oyunu",
@@ -21,7 +21,7 @@ class GameApp:
         )
         self.label.place(relx=0.5, rely=0.2, anchor="center")
 
-        # Oyuna başlama butonu oluşturur ve ortalar
+        # Creates and centers the start game button
         self.start_game_button = tk.Button(
             self.main_frame,
             text="Oyna",
@@ -34,7 +34,7 @@ class GameApp:
         )
         self.start_game_button.place(relx=0.5, rely=0.4, anchor="center")
 
-        # Taş, Kağıt, Makas butonları oluşturur ve başlangıçta gizler
+        # Creates Rock, Paper, Scissors buttons and hides them at startup
         self.rock_button = tk.Button(
             self.main_frame,
             text="Taş",
@@ -51,7 +51,7 @@ class GameApp:
             command=lambda: self.make_move("makas")
         )
 
-        # Oyun bilgisi etiketi oluşturur ve başlangıçta boş kalır
+        # Creates a game info tag and is initially empty
         self.game_info_label = tk.Label(
             self.main_frame,
             text=(
@@ -65,7 +65,7 @@ class GameApp:
         )
         self.game_info_label.place(relx=0.5, rely=0.7, anchor="center")
 
-        # Tur sonuçlarını gösterecek etiket
+        # Label to show tour results
         self.tour_results_label = tk.Label(
             self.main_frame,
             text="",
@@ -73,19 +73,19 @@ class GameApp:
         )
         self.tour_results_label.place(relx=0.5, rely=0.8, anchor="center")
 
-        # Oyun durumunu ve tur sayısını takip etmek için değişkenler
-        self.player_tour_scores = [0, 0, 0]  # Her turdaki oyuncu skorları
-        self.computer_tour_scores = [0, 0, 0]  # Her turdaki bilgisayar skorları
+        # Variables to track game state and number of rounds
+        self.player_tour_scores = [0, 0, 0]  # Player scores in each round
+        self.computer_tour_scores = [0, 0, 0]  # Computer scores in each round
         self.current_tour = 0
         self.rounds_left = 3
-        self.tour_results = [""] * 3  # Her turun sonucunu saklamak için liste
+        self.tour_results = [""] * 3  # List to store the result of each round
 
 
     def make_move(self, player_move):
-            """Oyuncunun hamlesini işleme koyar ve oyunu günceller.
+            """Processes the player's move and updates the game.
 
             Args:
-                player_move (str): Oyuncunun seçtiği hamle (taş, kağıt veya makas).
+                player_move (str): Player's chosen move (rock, paper or scissors).
 
             Returns:
                 None
@@ -99,16 +99,16 @@ class GameApp:
 
             if player_move == computer_move:
                 result = "Beraberlik!"
-                result_color = "black"  # Beraberlik için siyah
+                result_color = "black"  # Black for a draw
             elif (player_move == "taş" and computer_move == "makas") or \
                 (player_move == "makas" and computer_move == "kağıt") or \
                 (player_move == "kağıt" and computer_move == "taş"):
                 result = "Kazandınız!"
-                result_color = "green"  # Kazanma için yeşil
+                result_color = "green"  # Green for winning
                 self.player_tour_scores[self.current_tour] += 1
             else:
                 result = "Bilgisayar kazandı!"
-                result_color = "red"  # Kaybetme için kırmızı
+                result_color = "red"  # Red for losing
                 self.computer_tour_scores[self.current_tour] += 1
 
             self.update_game_info(player_move, computer_move, result, result_color)
@@ -121,13 +121,13 @@ class GameApp:
 
 
     def update_game_info(self, player_move, computer_move, result, result_color):
-        """Oyun bilgisini günceller ve sonucu renkli olarak gösterir.
+        """Updates game information and shows the result in color.
 
         Args:
-            player_move (str): Oyuncunun seçtiği hamle.
-            computer_move (str): Bilgisayarın seçtiği hamle.
-            result (str): Oyunun sonucu (Kazandınız, Bilgisayar kazandı, vb.).
-            result_color (str): Sonuç rengini belirten renk adı.
+            player_move (str): Player's chosen move.
+            computer_move (str): The move the computer chooses.
+            result (str): The result of the game (You won, Computer won, etc.)).
+            result_color (str): Color name indicating the result color.
 
         Returns:
             None
@@ -140,19 +140,18 @@ class GameApp:
         
         self.game_info_label.config(
             text=game_info_text,
-            fg=result_color  # Sonuç rengini ayarlıyor
+            fg=result_color  # Sets the result color
         )
         
-        # game_info_label'ı konumlandır
-        # Butonları yerleştirdikten sonra burayı ayarlayabilirsiniz
+        # position game_info_label
         self.game_info_label.place(relx=0.5, rely=0.65, anchor="center")
 
 
     def tas_kagit_makas_iremnur_akalin(self):
-        """Oyunu başlatır ve arayüzü günceller.
+        """Launches the game and updates the interface.
 
-        Bu yöntem, oyunu başlatır ve kullanıcıya seçenekleri sunar. Ayrıca, skorları sıfırlar
-        ve mevcut turu günceller.
+        This method starts the game and presents the user with options. 
+        It also resets the scores and updates the current tour.
         
         Args:
             None
@@ -160,15 +159,15 @@ class GameApp:
         Returns:
             None
         """
-        # Oyuna başlama butonunu gizler
+        # Hides the start game button
         self.start_game_button.place_forget()
 
-        # Taş, Kağıt, Makas butonlarını ortalanmış şekilde gösterir
+        # Shows Rock, Paper, Scissors buttons centered
         self.rock_button.place(relx=0.3, rely=0.5, anchor="center")
         self.paper_button.place(relx=0.5, rely=0.5, anchor="center")
         self.scissors_button.place(relx=0.7, rely=0.5, anchor="center")
 
-        # Skorları sıfırlar ve oyunu başlatır
+        # Resets scores and starts the game
         self.player_tour_scores = [0, 0, 0]
         self.computer_tour_scores = [0, 0, 0]
         self.current_tour = 0
@@ -178,9 +177,10 @@ class GameApp:
 
 
     def update_tour_results(self):
-        """Tur sonuçlarını günceller.
+        """Updates lap results.
 
-        Bu yöntem, mevcut turun sonuçlarını günceller ve sonucu ekranda gösterir.
+        This method updates the results of the 
+        current lap and shows the result on the screen.
 
         Args:
             None
@@ -188,23 +188,23 @@ class GameApp:
         Returns:
             None
         """
-        # Mevcut turun sonuçlarını günceller
+        # Updates the results of the current round
         self.tour_results_label.config(
             text=self.tour_results[self.current_tour]
         )
         self.tour_results_label.place(
             relx=0.5, 
             rely=0.8, 
-            anchor="center"  # Label'ın konumu
+            anchor="center"  # Label's location
         )
 
 
     def end_tour(self):
-        """Bir turun sonunu işleme alır ve sonucu gösterir.
+        """Processes the end of a round and shows the result.
 
-        Bu yöntem, mevcut turun sonucunu değerlendirir, sonucu günceller ve
-        oyunun devam edip etmediğini kontrol eder. Tur sonuçlarını ve 
-        oyun bilgisini ekranda gösterir.
+        This method evaluates the result of the current round, updates the result and
+        checks whether the game continues. Checks the round results and 
+        shows the game information on the screen.
 
         Args:
             None
@@ -214,47 +214,48 @@ class GameApp:
         """
         if self.player_tour_scores[self.current_tour] >= 2:
             result = "Turu kazandınız!"
-            result_color = "green"  # Kazanma için yeşil
+            result_color = "green"  # Green for winning
         else:
             result = "Bilgisayar turu kazandı!"
-            result_color = "red"  # Kaybetme için kırmızı
+            result_color = "red"  # Red for losing
 
-        # Tur sonucunu günceller
+        # Updates the round result
         self.tour_results[self.current_tour] = f"{self.current_tour + 1}. Tur Kazananı: {result}"
         self.update_tour_results()
 
-        # Bilgisayarın ve oyuncunun seçimini örnek olarak ayarlanıyor
-        # Bu değerler gerçek seçimlerle değiştiriliyor
-        player_move = "Taş"  # Örnek oyuncu seçimi
-        computer_move = "Makas"  # Örnek bilgisayar seçimi
+        # Setting the choice of PC and player as an example
+        # These values are replaced by real choices
+        player_move = "Taş"  # Sample casting
+        computer_move = "Makas"  # Sample computer selection
 
-        # Oyun bilgisini günceller
+        # Updates game information
         self.update_game_info(player_move, computer_move, result, result_color)
 
         self.current_tour += 1
 
-        # Oyunun bitip bitmediğini kontrol eder
+        # Checks whether the game is over
         if self.current_tour >= 3 or \
         (self.player_tour_scores.count(2) >= 2 or self.computer_tour_scores.count(2) >= 2):
             self.end_game()
         else:
-            # Yeni tur başlatılmasıyla ilgili bilgi verir
+            # Informs about starting a new round
             self.game_info_label.config(
                 text=f"{self.tour_results[self.current_tour - 1]}\nYeni tura geçildi.",
-                fg="black"  # Diğer bilgiler için siyah
+                fg="black"  # Black for other information
             )
             self.game_info_label.place(
                 relx=0.5,
                 rely=0.9,
-                anchor="center"  # Bilgi label'ının konumu
+                anchor="center"  # Location of the information label
             )
 
 
     def end_game(self):
-        """Oyun sonunda sonucu gösterir ve yeni oyun seçeneği sunar.
+        """At the end of the game, it shows the result and offers a new game option.
 
-        Bu yöntem, oyunun sonucunu değerlendirir ve sonuçları ekranda gösterir.
-        Ayrıca, kullanıcıya yeni bir oyun başlatma seçeneği sunar.
+        This method evaluates the outcome of the game and shows the 
+        results on the screen.
+        It also gives the user the option to start a new game.
 
         Args:
             None
@@ -267,21 +268,21 @@ class GameApp:
         else:
             result = "Bilgisayar oyunu kazandı."
 
-        # Oyun sonucunu günceller
+        # Updates the game result
         self.game_info_label.config(
             text="\n".join(self.tour_results) + "\n\n" + result
         )
         
-        # Yeni oyun başlatma seçeneğini sunar
+        # Offers the option to start a new game
         self.ask_to_play_again()
 
 
     def ask_to_play_again(self):
-        """Kullanıcıya ve bilgisayara yeni bir oyun oynayıp oynamak istemediğini sorar.
+        """It asks the user and the computer if they want to play a new game.
 
-        Bu yöntem, kullanıcıya oyuna devam etmek isteyip istemediğini sorar ve
-        bilgisayarın da yanıtını rastgele belirler. Yanıtlara göre oyunu sıfırlar
-        veya uygulamayı kapatır.
+        This method asks the user if they want to continue the game and
+        also randomizes the computer's response. Resets the game according to the answers
+        or closes the application.
 
         Args:
             None
@@ -289,10 +290,10 @@ class GameApp:
         Returns:
             None
         """
-        # Kullanıcıya devam etmek isteyip istemediğini sorar
+        # Asks the user if he/she wants to continue
         continue_user = messagebox.askyesno("Oyun Bitti", "Oyuna devam etmek ister misiniz?")
 
-        # Bilgisayar devam etmek isteyip istemediğini rastgele belirler
+        # Computer randomly determines if it wants to continue
         continue_computer = random.choice([True, False])
 
         if continue_user and continue_computer:
@@ -305,9 +306,9 @@ class GameApp:
 
 
     def reset_game(self):
-        """Oyunu sıfırlar ve tekrar başlatır.
+        """Resets and restarts the game.
 
-        Bu yöntem, oyunun tüm durumunu sıfırlar ve yeni bir oyun başlatır.
+        This method resets the entire game state and starts a new game.
         
         Args:
             None
@@ -315,28 +316,27 @@ class GameApp:
         Returns:
             None
         """
-        # Oyun bilgilerini temizler
+        # Clears game information
         self.game_info_label.config(text="")
         
-        # Skorları ve oyun durumunu sıfırlar
+        # Resets scores and game status
         self.player_tour_scores = [0, 0, 0]
         self.computer_tour_scores = [0, 0, 0]
         self.current_tour = 0
         self.rounds_left = 3
         self.tour_results = [""] * 3
         
-        # Yeni oyunu başlatır
+        # Starts new game
         self.tas_kagit_makas_iremnur_akalin()
 
 
 if __name__ == "__main__":
 
-    # Ana pencereyi oluşturur
+    # Creates the main window
     root = tk.Tk()
     
-    # Uygulama nesnesini başlatır
+    # Initializes the application object
     app = GameApp(root)
     
-    # Ana döngüyü başlatır
+    # Starts the main loop
     root.mainloop()
-
