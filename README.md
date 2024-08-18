@@ -1,27 +1,27 @@
-# Taş Kağıt Makas Oyunu
+# Rock Paper Scissors Game
 
-Bu Python uygulaması, klasik "Taş Kağıt Makas" oyununu Tkinter kullanarak grafiksel bir kullanıcı arayüzü ile oynamanızı sağlar.
+This Python application allows you to play the classic "Rock Paper Scissors" game with a graphical user interface using Tkinter.
 
-## Özellikler
+## Features
 
-- **Oyun Başlatma**: "Oyna" butonuna tıklayarak oyunu başlatabilirsiniz.
-- **Seçimler**: Taş, Kağıt veya Makas seçimleri yapabilirsiniz.
-- **Tur Sonuçları**: Her turun sonucunu ve kazananı gösterir.
-- **Oyun Sonu**: Oyun bittikten sonra kazananı bildirir ve yeni bir oyun oynayıp oynamak istemediğinizi sorar.
+- **Start Game**: You can start the game by clicking the "Play" button.
+- **Selections**: Make choices of Rock, Paper, or Scissors.
+- **Round Results**: Shows the result of each round and the winner.
+- **End Game**: After the game ends, it reports the winner and asks if you want to play a new game.
 
-## Gereksinimler
+## Requirements
 
 - Python 3.x
-- Tkinter (Python ile birlikte gelir)
+- Tkinter (comes with Python)
 
-## `GameApp` Sınıfı
+## `GameApp` Class
 
-- **`__init__(self, root)`**: Uygulamanın başlatıcı fonksiyonudur. Arayüz bileşenlerini oluşturur.
-- **`make_move(self, player_move)`**: Oyuncunun hamlesini işler ve oyunu günceller.
-- **`update_game_info(self, player_move, computer_move, result, result_color)`**: Oyun bilgilerini günceller ve sonucu renkli olarak gösterir.
-- **`tas_kagit_makas_iremnur_akalin(self)`**: Oyunu başlatır ve kullanıcıya seçenekleri sunar.
-- **`update_tour_results(self)`**: Tur sonuçlarını günceller.
-- **`end_tour(self)`**: Bir turun sonunu işler ve sonucu gösterir.
-- **`end_game(self)`**: Oyun sonucunu değerlendirir ve sonuçları ekranda gösterir.
-- **`ask_to_play_again(self)`**: Kullanıcıya yeni bir oyun oynayıp oynamak istemediğini sorar.
-- **`reset_game(self)`**: Oyunu sıfırlar ve tekrar başlatır.
+- **`__init__(self, root)`**: Initializes the application. Creates the interface components.
+- **`make_move(self, player_move)`**: Processes the player's move and updates the game.
+- **`update_game_info(self, player_move, computer_move, result, result_color)`**: Updates game information and displays the result in color.
+- **`tas_kagit_makas_iremnur_akalin(self)`**: Starts the game and presents the options to the user.
+- **`update_tour_results(self)`**: Updates the round results.
+- **`end_tour(self)`**: Processes the end of a round and shows the result.
+- **`end_game(self)`**: Evaluates the game result and displays the outcome on the screen.
+- **`ask_to_play_again(self)`**: Asks the user if they want to play a new game.
+- **`reset_game(self)`**: Resets the game and starts it again.
